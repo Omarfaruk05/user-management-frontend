@@ -40,9 +40,11 @@ const Navbar = () => {
             <button className="btn btn-sm rounded-md text-white bg-teal-700 mr-2 hover:bg-teal-800">
               Login
             </button>
-            <button className="btn btn-sm rounded-md text-white bg-red-700 mr-2 hover:bg-red-800">
-              Sign up
-            </button>
+            <Link to="/sign-up">
+              <button className="btn btn-sm rounded-md text-white bg-red-700 mr-2 hover:bg-red-800">
+                Sign up
+              </button>
+            </Link>
           </div>
         </div>
       </div>
