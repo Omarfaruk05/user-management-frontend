@@ -32,6 +32,24 @@ const BookDetails = () => {
             </div>
           </div>
         </div>
+        <div className=" ml-4 mt-8 mb-4">
+          <h2 className="text-2xl font-bold mb-3">Reviews:</h2>
+          <p className="mb-4">
+            <span className="bg-slate-200 px-2 py-1 rounded-lg mb-2">
+              I am to obak
+            </span>
+          </p>
+          <p className="mb-4">
+            <span className="bg-slate-200 px-2 py-1 rounded-lg mb-2">
+              I am to obak
+            </span>
+          </p>
+          <p className="mb-4">
+            <span className="bg-slate-200 px-2 py-1 rounded-lg mb-2">
+              I am to obak
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
