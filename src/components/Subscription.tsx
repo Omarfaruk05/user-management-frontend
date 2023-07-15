@@ -1,9 +1,41 @@
+import { BsBook, BsHeadphones, BsMusicNoteBeamed } from "react-icons/bs";
+import { FaRegAddressBook, FaMicrophoneAlt } from "react-icons/fa";
+import { HiOutlineDocumentSearch } from "react-icons/Hi";
+
 const Subscription = () => {
   return (
     <div>
-      <div>
+      <div className="max-w-7xl mx-auto px-2 pt-20 pb-4">
         <div>
-          <h2>All in one simple subscription</h2>
+          <h2 className="text-4xl text-center text-slate-600 font-semibold font-serif mb-16">
+            All in one simple subscription
+          </h2>
+          <div className="flex  gap-4 justify-center flex-wrap">
+            <div className="text-center px-8">
+              <BsBook className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Books</h6>
+            </div>
+            <div className="text-center px-8">
+              <BsHeadphones className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Audiobooks</h6>
+            </div>
+            <div className="px-10">
+              <FaRegAddressBook className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Magazines</h6>
+            </div>
+            <div className="px-10">
+              <FaMicrophoneAlt className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Products</h6>
+            </div>
+            <div className="px-10">
+              <BsMusicNoteBeamed className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Sheet music</h6>
+            </div>
+            <div className="px-10">
+              <HiOutlineDocumentSearch className="text-4xl mb-4 text-teal-700  mx-auto" />
+              <h6 className="text-lg font-semibold">Documents</h6>
+            </div>
+          </div>
         </div>
       </div>
     </div>

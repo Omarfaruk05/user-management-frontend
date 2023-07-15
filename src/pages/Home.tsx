@@ -1,9 +1,11 @@
-import Banner from "../components/banner";
+import Banner from "../components/Banner";
+import Subscription from "../components/Subscription";
 
 const Home = () => {
   return (
     <div>
       <Banner />
+      <Subscription />
     </div>
   );
 };
