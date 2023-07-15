@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="bg-[#f8f4f2] py-1 sticky top-0">
@@ -22,15 +24,19 @@ const Navbar = () => {
               </label>
             </div>
             <div>
-              <h3 className="text-2xl font-semibold text-teal-800 font-mono">
-                Book Haven
-              </h3>
+              <Link to="/">
+                <h3 className="text-2xl font-semibold text-teal-800 font-mono">
+                  Book Haven
+                </h3>
+              </Link>
             </div>
           </div>
           <div>
-            <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
-              All Books
-            </button>
+            <Link to="/all-books">
+              <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
+                All Books
+              </button>
+            </Link>
             <button className="btn btn-sm rounded-md text-white bg-teal-700 mr-2 hover:bg-teal-800">
               Login
             </button>
