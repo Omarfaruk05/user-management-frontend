@@ -8,6 +8,9 @@ import Login from "../pages/Login";
 import UpdateBook from "../pages/UpdateBook";
 import BookDetails from "../pages/BookDetails";
 import CreateBook from "../pages/CreateBook";
+import WishList from "../pages/WishList";
+import Reading from "../pages/Reading";
+import Finished from "../pages/Finished";
 
 const routes = createBrowserRouter([
   {
@@ -41,6 +44,18 @@ const routes = createBrowserRouter([
       {
         path: "/create-book",
         element: <CreateBook />,
+      },
+      {
+        path: "/wish-list",
+        element: <WishList />,
+      },
+      {
+        path: "/reading",
+        element: <Reading />,
+      },
+      {
+        path: "/finished",
+        element: <Finished />,
       },
     ],
   },

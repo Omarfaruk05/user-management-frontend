@@ -64,15 +64,21 @@ const Navbar = () => {
                 tabIndex={0}
                 className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
-                  <a>Wish List</a>
-                </li>
-                <li>
-                  <a>Reading</a>
-                </li>
-                <li>
-                  <a>Finished</a>
-                </li>
+                <Link to="wish-list">
+                  <li>
+                    <a>Wish List</a>
+                  </li>
+                </Link>
+                <Link to="reading">
+                  <li>
+                    <a>Reading</a>
+                  </li>
+                </Link>
+                <Link to="finished">
+                  <li>
+                    <a>Finished</a>
+                  </li>
+                </Link>
                 <li className="btn text-white btn-sm w-full bg-teal-500 hover:bg-teal-600 mt-1">
                   LogOut
                 </li>
