@@ -16,7 +16,7 @@ const AllBooks = () => {
               {nums.map((x) => (
                 <div className="border">
                   <div>
-                    <div className="bg-slate-200 px-5 py-3 ">
+                    <div className="bg-slate-200 px-5 py-3 w-[160px] h-[190px] ">
                       <img width={120} src={book1} alt="" />
                     </div>
                     <div className="px-2">
