@@ -17,12 +17,12 @@ const SignUp = () => {
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[95vh]">
-        <div className="bg-red-500 text-center hidden md:block md:h-full  md:flex justify-center items-center px-4 ">
+        <div className="bg-[#f6f4e3] text-center hidden md:block md:h-full  md:flex justify-center items-center px-4 ">
           <div className="">
-            <h1 className="text-4xl font-bold font-serif text-white mb-5">
+            <h1 className="text-4xl font-bold font-serif mb-5">
               Wellcome to <span className="text-teal-900">Book Haven.</span>
             </h1>
-            <p className="text-md text-white font-semibold">
+            <p className="text-md text-gray-700 font-semibold">
               "Books are the keys that unlock the doors to knowledge,
               inspiration, and imagination. They hold the power to shape minds,
               broaden horizons, and transform lives. In a world of boundless
@@ -32,7 +32,7 @@ const SignUp = () => {
           </div>
         </div>
         <div className="text-center mx-12">
-          <h1 className="text-4xl font-bold font-serif mb-12">Sign In</h1>
+          <h1 className="text-4xl font-bold font-serif mb-12">Sign Up</h1>
 
           {/* form  */}
           <div>
@@ -96,6 +96,7 @@ const SignUp = () => {
               <div>
                 <input
                   type="submit"
+                  value="Sign Up"
                   className="bg-teal-700 btn text-white w-full hover:bg-teal-800"
                 />
               </div>
