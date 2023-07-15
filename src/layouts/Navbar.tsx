@@ -32,6 +32,11 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center">
+            <Link to="/create-book">
+              <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
+                Create Book
+              </button>
+            </Link>
             <Link to="/all-books">
               <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
                 All Books
