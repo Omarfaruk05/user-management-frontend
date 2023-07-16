@@ -1,4 +1,3 @@
-import book1 from "../assets/1689173080.webp";
 import WishListBook from "../components/WishListBook";
 import { useAppSelector } from "../redux/hook";
 

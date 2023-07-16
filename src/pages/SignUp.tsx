@@ -1,6 +1,5 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { createUser } from "../redux/features/user/userSlice";
-import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useCreateUserMutation } from "../redux/features/user/userApi";
 import { useEffect } from "react";

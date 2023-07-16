@@ -2,10 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
-import {
-  addToWishList,
-  removeFromWishList,
-} from "../redux/features/wishList/wishListSlice";
+import { addToWishList } from "../redux/features/wishList/wishListSlice";
 
 interface IBook {
   _id: string;

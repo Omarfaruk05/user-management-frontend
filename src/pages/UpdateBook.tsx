@@ -4,7 +4,7 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
-import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { useAppSelector } from "../redux/hook";
 
 interface IFormInput {
   email: string | null;
@@ -23,7 +23,7 @@ const UpdateBook = () => {
 
   const [updateBookMutation, {}] = useUpdateBookMutation();
 
-  const { data, isLoading, isError } = useGetSingleBookQuery(id);
+  const { data } = useGetSingleBookQuery(id);
   const book = data?.data;
 
   const {

@@ -14,13 +14,6 @@ const AllBooks = () => {
   const [searchData, setSearchData] = useState("");
   console.log(publicationYear);
 
-  let comicValue;
-  let fictionValue;
-  let novelValue;
-
-  comic && (comicValue = "comic");
-  fiction && (fictionValue = "fiction");
-  novel && (novelValue = "novel");
   const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const handleComic = () => {
@@ -46,7 +39,7 @@ const AllBooks = () => {
   interface ISearch {
     search: string;
   }
-  const { register, handleSubmit, reset } = useForm<ISearch>();
+  const { register, handleSubmit } = useForm<ISearch>();
 
   const onSubmit = (data: ISearch) => {
     const search = data.search;
@@ -59,7 +52,7 @@ const AllBooks = () => {
     publicationTime: publicationYear,
   };
 
-  const { data, isLoading, isError } = useGetBooksQuery(payload);
+  const { data, isLoading } = useGetBooksQuery(payload);
 
   const books = data?.data;
   return (
