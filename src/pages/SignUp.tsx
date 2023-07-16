@@ -1,18 +1,33 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { createUser } from "../redux/features/user/userSlice";
+import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { useCreateUserMutation } from "../redux/features/user/userApi";
 
 interface IFormInput {
   fullName: string;
   email: string;
-  password: number;
+  password: string;
 }
 
 const SignUp = () => {
+  const dispatch = useAppDispatch();
+  const [createUserMutation, {}] = useCreateUserMutation();
+
+  const { user, isLoading, isError, error } = useAppSelector(
+    (state) => state.user
+  );
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit = (data: IFormInput) => {
+    createUserMutation(data);
+
+    dispatch(createUser({ email: data.email, password: data.password }));
+  };
 
   return (
     <div>
@@ -100,6 +115,9 @@ const SignUp = () => {
                   className="bg-teal-700 btn text-white w-full hover:bg-teal-800"
                 />
               </div>
+              {isError && (
+                <small className="text-sm text-red-500">{error}</small>
+              )}
             </form>
           </div>
         </div>

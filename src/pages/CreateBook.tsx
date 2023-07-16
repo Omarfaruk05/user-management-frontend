@@ -1,4 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useCreateBookMutation } from "../redux/features/books/bookApi";
+import { useAppDispatch } from "../redux/hook";
 
 interface IFormInput {
   image: string;
@@ -10,12 +12,16 @@ interface IFormInput {
 }
 
 const CreateBook = () => {
+  const [createBookMutation, {}] = useCreateBookMutation();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    createBookMutation(data);
+  };
   return (
     <div>
       <div className="max-w-7xl mx-auto mb-8 mt-2">

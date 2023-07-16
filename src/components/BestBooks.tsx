@@ -2,7 +2,7 @@ import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import BookCart from "./BookCart";
 import LoadingCart from "./LoadingCart";
 
-interface IBook {
+export interface IBook {
   _id: string;
   image: string;
   title: string;

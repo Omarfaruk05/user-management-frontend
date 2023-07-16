@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface IBook {
   _id: string;
@@ -12,19 +12,17 @@ interface IBook {
 }
 
 const BookCart = (book: IBook) => {
-  const date = book?.publicationTime.toString().split("T")[0];
+  let date;
+  if (book?.publicationTime) {
+    date = book?.publicationTime.toString().split("T")[0];
+  }
 
-  console.log();
-  const navigateToDetails = () => {};
   return (
     <div className="border">
       <div>
         <Link to={`/book-details/${book?._id}`}>
           {" "}
-          <div
-            onClick={navigateToDetails}
-            className="bg-slate-200 px-5 py-3 w-[160px] h-[190px]"
-          >
+          <div className="bg-slate-200 px-5 py-3 w-[160px] h-[190px]">
             <img width={120} src={book?.image} alt="" />
           </div>
         </Link>

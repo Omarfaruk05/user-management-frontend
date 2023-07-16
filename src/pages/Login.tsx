@@ -1,18 +1,41 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
+import { loginUser } from "../redux/features/user/userSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface IFormInput {
   fullName: string;
   email: string;
-  password: number;
+  password: string;
 }
 
 const Login = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+
+  const { user, isLoading, isError, error } = useAppSelector(
+    (state) => state.user
+  );
+  console.log(isError);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    dispatch(loginUser({ email: data.email, password: data.password }));
+  };
+
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate(from, { replace: true });
+    }
+  }, [user.email, isLoading]);
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[95vh]">
@@ -82,6 +105,9 @@ const Login = () => {
                   className="bg-teal-700 btn text-white w-full hover:bg-teal-800"
                 />
               </div>
+              {isError && (
+                <small className="text-sm text-red-500">{error}</small>
+              )}
             </form>
           </div>
         </div>

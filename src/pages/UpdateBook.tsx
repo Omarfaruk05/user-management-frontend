@@ -1,6 +1,14 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "../redux/features/books/bookApi";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 interface IFormInput {
+  email: string | null;
+  id: string;
   image: string;
   title: string;
   author: string;
@@ -9,12 +17,31 @@ interface IFormInput {
 }
 
 const UpdateBook = () => {
+  const { id } = useParams();
+
+  const { user } = useAppSelector((state) => state.user);
+
+  const [updateBookMutation, {}] = useUpdateBookMutation();
+
+  const { data, isLoading, isError } = useGetSingleBookQuery(id);
+  const book = data?.data;
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    updateBookMutation({
+      email: user?.email,
+      id,
+      image: data.image,
+      title: data.title,
+      author: data.author,
+      genre: data.genre,
+      publicationTime: data.publicationTime,
+    });
+  };
   return (
     <div>
       <div className="max-w-7xl mx-auto mb-8 mt-2">
@@ -30,8 +57,10 @@ const UpdateBook = () => {
                   className="input input-bordered w-96 mb-3"
                   type="text"
                   placeholder="Image"
-                  {...register("image")}
-                  defaultValue={"default value"}
+                  {...register("image", {
+                    required: "Image is required",
+                  })}
+                  defaultValue={book?.image}
                   aria-invalid={errors.image ? "true" : "false"}
                 />
                 {errors.image && (
@@ -46,8 +75,10 @@ const UpdateBook = () => {
                   type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="Title"
-                  {...register("title")}
-                  defaultValue={"default value"}
+                  {...register("title", {
+                    required: "Title is required",
+                  })}
+                  defaultValue={book?.title}
                   aria-invalid={errors.title ? "true" : "false"}
                 />
                 {errors.title && (
@@ -64,8 +95,10 @@ const UpdateBook = () => {
                   type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="Author"
-                  {...register("author")}
-                  defaultValue={"default value"}
+                  {...register("author", {
+                    required: "Author is required",
+                  })}
+                  defaultValue={book?.author}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.author && (
@@ -80,8 +113,10 @@ const UpdateBook = () => {
                   type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="Genre"
-                  {...register("genre")}
-                  defaultValue={"default value"}
+                  {...register("genre", {
+                    required: "Genre is required",
+                  })}
+                  defaultValue={book?.genre}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.genre && (
@@ -98,8 +133,10 @@ const UpdateBook = () => {
                   type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="Publication Time"
-                  {...register("publicationTime")}
-                  defaultValue={"default value"}
+                  {...register("publicationTime", {
+                    required: "Publication Time is required",
+                  })}
+                  defaultValue={book?.publicationTime}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.publicationTime && (

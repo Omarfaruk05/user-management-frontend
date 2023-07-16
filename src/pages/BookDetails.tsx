@@ -1,19 +1,24 @@
 import { Link, useParams } from "react-router-dom";
-import langing from "../assets/1666767104.webp";
 import { useGetSingleBookQuery } from "../redux/features/books/bookApi";
+import { useAppSelector } from "../redux/hook";
 
 const BookDetails = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetSingleBookQuery(id);
+  const { user } = useAppSelector((state) => state.user);
+
   const book = data?.data;
-  const date = book.publicationTime.toString().split("T")[0];
+  let date;
+  if (book?.publicationTime) {
+    date = book?.publicationTime.toString().split("T")[0];
+  }
   return (
     <div>
       {book && (
         <div className="max-w-7xl mx-auto px-2">
           <div className="md:flex gap-4">
-            <div className="md:w-1/3 flex justify-center">
-              <img src={langing} alt="book photo" />
+            <div className="bg-slate-200  md:w-1/3 flex justify-center">
+              <img src={book?.image} alt="book photo" />
             </div>
             <div className="md:w-2/3 mt-12 mx-4">
               <div>
@@ -31,15 +36,19 @@ const BookDetails = () => {
                 </p>
               </div>
               <div className="mt-4">
-                <Link to="/update-book">
-                  {" "}
-                  <button className="btn text-white mr-2 px-16 mb-2 bg-green-500 hover:bg-green-600">
-                    Edite Book
-                  </button>
-                </Link>
-                <button className="btn text-white mr-2 px-[60px] mb-2 bg-red-500 hover:bg-red-600">
-                  Delete Book
-                </button>
+                {!(user?.email === book?.authorEmail) && (
+                  <>
+                    <Link to={`/update-book/${book?._id}`}>
+                      {" "}
+                      <button className="btn text-white mr-2 px-16 mb-2 bg-green-500 hover:bg-green-600">
+                        Edite Book
+                      </button>
+                    </Link>
+                    <button className="btn text-white mr-2 px-[60px] mb-2 bg-red-500 hover:bg-red-600">
+                      Delete Book
+                    </button>
+                  </>
+                )}
                 <button className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600">
                   Add To Wishlist
                 </button>
