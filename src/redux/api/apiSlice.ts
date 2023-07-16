@@ -5,6 +5,6 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://book-haven-backend.vercel.app/api/v1",
   }),
-  tagTypes: ["reviews"],
+  tagTypes: ["comment"],
   endpoints: () => ({}),
 });

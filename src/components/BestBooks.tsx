@@ -1,7 +1,23 @@
-import book1 from "../assets/1689173080.webp";
+import { useGetBooksQuery } from "../redux/features/books/bookApi";
+import BookCart from "./BookCart";
+import LoadingCart from "./LoadingCart";
+
+interface IBook {
+  _id: string;
+  image: string;
+  title: string;
+  author: string;
+  authorEmail: string;
+  genre: string;
+  publicationTime: Date;
+  reviews: string[];
+}
 
 const BestBooks = () => {
-  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const nums = [1, 2, 3, 4, 5, 6, 7];
+  const { data, isLoading, isError } = useGetBooksQuery(10);
+
+  const books = data?.data;
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 pt-20 pb-4">
@@ -11,21 +27,12 @@ const BestBooks = () => {
           </h2>
           <div className="mx-auto">
             <div className="flex  gap-4 justify-center  items-center flex-wrap">
-              {nums.map((x) => (
-                <div className="border">
-                  <div>
-                    <div className="bg-slate-200 px-5 py-3 w-[160px] h-[190px]">
-                      <img width={120} src={book1} alt="" />
-                    </div>
-                    <div className="px-2">
-                      <small className="text-xs text-gray-500">Date</small>
-                      <p className="text-xl font-semibold">Thitle</p>
-                      <p className="text-lg font-semibold">Author</p>
-                      <h4 className="text-md font-semibold">Genre</h4>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              {isLoading &&
+                nums.map((x) => <LoadingCart key={x}></LoadingCart>)}
+              {books &&
+                books.map((book: IBook) => (
+                  <BookCart {...book} key={book._id}></BookCart>
+                ))}
             </div>
           </div>
         </div>
