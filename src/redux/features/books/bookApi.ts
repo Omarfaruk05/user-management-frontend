@@ -4,9 +4,11 @@ const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: (limit) => `/book/get-book?limit=${limit}`,
+      providesTags: ["comment"],
     }),
     getSingleBook: builder.query({
       query: (id) => `/book/get-single-book/${id}`,
+      providesTags: ["comment"],
     }),
     createBook: builder.mutation({
       query: (data) => ({

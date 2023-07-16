@@ -30,6 +30,7 @@ const UpdateBook = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     updateBookMutation({
@@ -41,6 +42,7 @@ const UpdateBook = () => {
       genre: data.genre,
       publicationTime: data.publicationTime,
     });
+    reset();
   };
   return (
     <div>

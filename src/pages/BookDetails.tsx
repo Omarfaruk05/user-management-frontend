@@ -1,17 +1,43 @@
 import { Link, useParams } from "react-router-dom";
-import { useGetSingleBookQuery } from "../redux/features/books/bookApi";
+import {
+  useGetSingleBookQuery,
+  useUpdateBookMutation,
+} from "../redux/features/books/bookApi";
 import { useAppSelector } from "../redux/hook";
+import { useForm } from "react-hook-form";
+
+interface IComment {
+  review: string;
+}
 
 const BookDetails = () => {
   const { id } = useParams();
-  const { data, isLoading, isError } = useGetSingleBookQuery(id);
+  const { data } = useGetSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
+
+  const [updateBookMutation, {}] = useUpdateBookMutation();
 
   const book = data?.data;
   let date;
   if (book?.publicationTime) {
     date = book?.publicationTime.toString().split("T")[0];
   }
+
+  const { register, handleSubmit, reset } = useForm<IComment>();
+
+  const onSubmit = (data: IComment) => {
+    const review = data.review;
+
+    const updatedData = {
+      email: book?.authorEmail,
+      id,
+      reviews: [review, ...book.reviews],
+    };
+    console.log(updatedData);
+    updateBookMutation(updatedData);
+    reset();
+  };
+
   return (
     <div>
       {book && (
@@ -36,7 +62,7 @@ const BookDetails = () => {
                 </p>
               </div>
               <div className="mt-4">
-                {!(user?.email === book?.authorEmail) && (
+                {user?.email === book?.authorEmail && (
                   <>
                     <Link to={`/update-book/${book?._id}`}>
                       {" "}
@@ -59,16 +85,23 @@ const BookDetails = () => {
             <h2 className="text-2xl font-bold mb-3">Reviews:</h2>
             <div className="form-control">
               <div className="input-group">
-                <input
-                  type="text"
-                  placeholder="Search…"
-                  className="input input-bordered"
-                />
-                <button className="btn bg-lime-500 ">Comment</button>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <input
+                    placeholder="Your Regiew"
+                    type="text"
+                    className="input input-bordered"
+                    {...register("review")}
+                  />
+                  <input
+                    type="submit"
+                    value={"Comment"}
+                    className="btn bg-lime-500 "
+                  />
+                </form>
               </div>
             </div>
             {book.reviews.map((review: string) => (
-              <p className="mb-4">
+              <p className="mb-4 mt-4">
                 <span className="bg-slate-200 px-2 py-1 rounded-lg mb-2">
                   {review}
                 </span>

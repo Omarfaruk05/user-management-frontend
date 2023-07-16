@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCreateBookMutation } from "../redux/features/books/bookApi";
-import { useAppDispatch } from "../redux/hook";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 
 interface IFormInput {
   image: string;
@@ -12,15 +12,21 @@ interface IFormInput {
 }
 
 const CreateBook = () => {
+  const { user } = useAppSelector((state) => state.user);
+
   const [createBookMutation, {}] = useCreateBookMutation();
 
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log(data);
+
     createBookMutation(data);
+    reset();
   };
   return (
     <div>
@@ -88,8 +94,10 @@ const CreateBook = () => {
                 </p>
                 <input
                   type="email"
-                  className="input input-bordered w-96 mb-3"
+                  className="input input-bordered w-96 mb-3 bg-gray-200 font-semibold"
                   placeholder="Author Enail"
+                  value={user?.email!}
+                  readOnly
                   {...register("authorEmail", {
                     required: "Author Email is required",
                   })}
@@ -140,7 +148,7 @@ const CreateBook = () => {
               <div>
                 <input
                   type="submit"
-                  value="Update"
+                  value="Create"
                   className="bg-teal-700 btn text-white w-96 hover:bg-teal-800"
                 />
               </div>
