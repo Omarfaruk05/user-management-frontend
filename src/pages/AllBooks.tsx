@@ -3,51 +3,86 @@ import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import LoadingCart from "../components/LoadingCart";
 import BookCart from "../components/BookCart";
 import { IBook } from "../components/BestBooks";
+import { useForm } from "react-hook-form";
 
 const AllBooks = () => {
   const [comic, setComic] = useState(false);
   const [fiction, setFiction] = useState(false);
   const [novel, setNovel] = useState(false);
+  const [genre, setGenre] = useState("");
   const [publicationYear, setPublicationYear] = useState("");
+  const [searchData, setSearchData] = useState("");
   console.log(publicationYear);
-  const nums = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  ];
 
-  const { data, isLoading, isError } = useGetBooksQuery(undefined);
+  let comicValue;
+  let fictionValue;
+  let novelValue;
+
+  comic && (comicValue = "comic");
+  fiction && (fictionValue = "fiction");
+  novel && (novelValue = "novel");
+  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  const handleComic = () => {
+    setGenre("comic");
+    setComic(true);
+    setFiction(false);
+    setNovel(false);
+  };
+  const handleFiction = () => {
+    setGenre("fiction");
+    setComic(false);
+    setFiction(true);
+    setNovel(false);
+  };
+  const handleNovel = () => {
+    setGenre("novel");
+    setComic(false);
+    setFiction(false);
+    setNovel(true);
+  };
+
+  console.log(publicationYear);
+  interface ISearch {
+    search: string;
+  }
+  const { register, handleSubmit, reset } = useForm<ISearch>();
+
+  const onSubmit = (data: ISearch) => {
+    const search = data.search;
+    setSearchData(search);
+  };
+  const payload = {
+    limit: "",
+    searchTerm: searchData,
+    genre: genre,
+    publicationTime: publicationYear,
+  };
+
+  const { data, isLoading, isError } = useGetBooksQuery(payload);
 
   const books = data?.data;
-
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 pt-8 pb-4">
+      <div className="max-w-7xl mx-auto px-4 pt-8 pb-4 min-h-[70vh]">
         <div>
           <div>
             <div className="mb-8 flex gap-4 justify-center">
               {/* searching  */}
               <div className="form-control w-2/5">
                 <div className="input-group">
-                  <input
-                    type="text"
-                    placeholder="Search…"
-                    className="input input-bordered w-full"
-                  />
-                  <button className="btn btn-square">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      />
-                    </svg>
-                  </button>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                      type="text"
+                      className="input input-bordered"
+                      {...register("search")}
+                    />
+                    <input
+                      type="submit"
+                      value={"search"}
+                      className="btn bg-purple-300"
+                    />
+                  </form>
                 </div>
               </div>
               {/* filtering  */}
@@ -73,7 +108,7 @@ const AllBooks = () => {
                               Comic
                             </span>
                             <input
-                              onClick={() => setComic(!comic)}
+                              onClick={handleComic}
                               type="checkbox"
                               checked={comic}
                               className="checkbox checkbox-success"
@@ -86,7 +121,7 @@ const AllBooks = () => {
                               Fiction
                             </span>
                             <input
-                              onClick={() => setFiction(!fiction)}
+                              onClick={handleFiction}
                               type="checkbox"
                               checked={fiction}
                               className="checkbox checkbox-success"
@@ -99,7 +134,7 @@ const AllBooks = () => {
                               Novel
                             </span>
                             <input
-                              onClick={() => setNovel(!novel)}
+                              onClick={handleNovel}
                               type="checkbox"
                               checked={novel}
                               className="checkbox checkbox-success"

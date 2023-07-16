@@ -1,4 +1,11 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../redux/hook";
+import { useUpdateUserMutation } from "../redux/features/user/userApi";
+import {
+  addToWishList,
+  removeFromWishList,
+} from "../redux/features/wishList/wishListSlice";
 
 interface IBook {
   _id: string;
@@ -12,10 +19,24 @@ interface IBook {
 }
 
 const BookCart = (book: IBook) => {
+  const dispatch = useDispatch();
+
+  const { user } = useAppSelector((state) => state.user);
+
+  const [updateUserMutation, {}] = useUpdateUserMutation();
   let date;
   if (book?.publicationTime) {
     date = book?.publicationTime.toString().split("T")[0];
   }
+
+  const handleWishList = () => {
+    dispatch(addToWishList(book));
+    const updatedData = {
+      email: user?.email,
+      wishList: [book?._id],
+    };
+    updateUserMutation(updatedData);
+  };
 
   return (
     <div className="border">
@@ -31,6 +52,12 @@ const BookCart = (book: IBook) => {
           <p className="text-md font-semibold">{book?.title}</p>
           <p className="text-sm font-semibold">{book?.author}</p>
           <h4 className="text-sm font-semibold">{book?.genre}</h4>
+        </div>
+        <div
+          onClick={handleWishList}
+          className="btn btn-sm rounded-sm bg-purple-300 font-semibold w-full"
+        >
+          Make WishList
         </div>
       </div>
     </div>

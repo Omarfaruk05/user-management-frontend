@@ -6,6 +6,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useForm } from "react-hook-form";
 import { addToWishList } from "../redux/features/wishList/wishListSlice";
+import { useUpdateUserMutation } from "../redux/features/user/userApi";
 
 interface IComment {
   review: string;
@@ -19,11 +20,22 @@ const BookDetails = () => {
 
   const [updateBookMutation, {}] = useUpdateBookMutation();
 
+  const [updateUserMutation, {}] = useUpdateUserMutation();
+
   const book = data?.data;
   let date;
   if (book?.publicationTime) {
     date = book?.publicationTime.toString().split("T")[0];
   }
+
+  const handleWishList = () => {
+    dispatch(addToWishList(book));
+    const updatedData = {
+      email: user?.email,
+      wishList: book?._id,
+    };
+    updateUserMutation(updatedData);
+  };
 
   const { register, handleSubmit, reset } = useForm<IComment>();
 
@@ -78,7 +90,7 @@ const BookDetails = () => {
                   </>
                 )}
                 <button
-                  onClick={() => dispatch(addToWishList(book))}
+                  onClick={handleWishList}
                   className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600"
                 >
                   Add To Wishlist

@@ -9,6 +9,8 @@ import {
   addToFinished,
   removeFromFinished,
 } from "../redux/features/finished/finishedSlice";
+import { useAppSelector } from "../redux/hook";
+import { useUpdateUserMutation } from "../redux/features/user/userApi";
 
 interface IBook {
   _id: string;
@@ -28,6 +30,11 @@ interface MyComponentProps {
 
 const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
   const dispatch = useDispatch();
+
+  const { user } = useAppSelector((state) => state.user);
+
+  const [updateUserMutation, {}] = useUpdateUserMutation();
+
   let date;
   if (book?.publicationTime) {
     date = book?.publicationTime.toString().split("T")[0];
@@ -37,10 +44,20 @@ const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
     if (payload === "Make Reading") {
       dispatch(removeFromWishList(book));
       dispatch(addToReading(book));
+      const updatedData = {
+        email: user?.email,
+        reading: [book?._id],
+      };
+      updateUserMutation(updatedData);
     }
     if (payload === "Make Finished") {
       dispatch(removeFromReading(book));
       dispatch(addToFinished(book));
+      const updatedData = {
+        email: user?.email,
+        finished: [book?._id],
+      };
+      updateUserMutation(updatedData);
     }
     if (payload === "Remove") {
       dispatch(removeFromFinished(book));

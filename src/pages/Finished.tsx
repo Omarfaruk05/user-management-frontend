@@ -1,4 +1,3 @@
-import book1 from "../assets/1689173080.webp";
 import WishListBook from "../components/WishListBook";
 import { useAppSelector } from "../redux/hook";
 
@@ -6,7 +5,7 @@ const Finished = () => {
   const { books } = useAppSelector((state) => state.finished);
   return (
     <div>
-      <div className="max-w-7xl mx-auto mt-12">
+      <div className="max-w-7xl mx-auto mt-12 min-h-[70vh]">
         <div>
           <div className="mx-auto">
             <div className="flex  gap-4 justify-center  items-center flex-wrap">

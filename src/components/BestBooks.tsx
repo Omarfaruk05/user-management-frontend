@@ -15,7 +15,12 @@ export interface IBook {
 
 const BestBooks = () => {
   const nums = [1, 2, 3, 4, 5, 6, 7];
-  const { data, isLoading, isError } = useGetBooksQuery(10);
+  const { data, isLoading, isError } = useGetBooksQuery({
+    limit: 10,
+    searchTerm: "",
+    genre: "",
+    publicationTime: "",
+  });
 
   const books = data?.data;
   return (
