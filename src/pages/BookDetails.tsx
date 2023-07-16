@@ -3,8 +3,9 @@ import {
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
-import { useAppSelector } from "../redux/hook";
+import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useForm } from "react-hook-form";
+import { addToWishList } from "../redux/features/wishList/wishListSlice";
 
 interface IComment {
   review: string;
@@ -12,6 +13,7 @@ interface IComment {
 
 const BookDetails = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const { data } = useGetSingleBookQuery(id);
   const { user } = useAppSelector((state) => state.user);
 
@@ -75,7 +77,10 @@ const BookDetails = () => {
                     </button>
                   </>
                 )}
-                <button className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600">
+                <button
+                  onClick={() => dispatch(addToWishList(book))}
+                  className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600"
+                >
                   Add To Wishlist
                 </button>
               </div>
