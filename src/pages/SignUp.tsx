@@ -3,6 +3,8 @@ import { createUser } from "../redux/features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useCreateUserMutation } from "../redux/features/user/userApi";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface IFormInput {
   fullName: string;
@@ -11,7 +13,11 @@ interface IFormInput {
 }
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useAppDispatch();
+  let from = location.state?.from?.pathname || "/";
+
   const [createUserMutation, {}] = useCreateUserMutation();
 
   const { user, isLoading, isError, error } = useAppSelector(
@@ -23,12 +29,18 @@ const SignUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm<IFormInput>();
-  const onSubmit = (data: IFormInput) => {
-    createUserMutation(data);
-
-    dispatch(createUser({ email: data.email, password: data.password }));
+  const onSubmit = async (data: IFormInput) => {
+    await dispatch(createUser({ email: data.email, password: data.password }));
+    if (error) {
+      createUserMutation(data);
+    }
   };
 
+  useEffect(() => {
+    if (user.email && !isLoading) {
+      navigate(from, { replace: true });
+    }
+  }, [user.email, isLoading]);
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[95vh]">
