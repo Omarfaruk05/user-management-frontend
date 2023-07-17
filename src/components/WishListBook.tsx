@@ -65,23 +65,25 @@ const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
   };
 
   return (
-    <div className="border">
+    <div className="rounded-lg border">
       <div>
         <Link to={`/book-details/${book?._id}`}>
           {" "}
-          <div className="bg-slate-200 px-5 py-3 w-[160px] h-[190px]">
+          <div className="rounded-t-md bg-slate-200 px-5 py-3 w-[160px] h-[190px]">
             <img width={120} src={book?.image} alt="" />
           </div>
         </Link>
         <div className="px-2">
-          <p className="text-xs text-gray-500">Published: {date}</p>
-          <p className="text-md font-semibold">{book?.title}</p>
-          <p className="text-sm font-semibold">{book?.author}</p>
-          <h4 className="text-sm font-semibold">{book?.genre}</h4>
+          <p className="text-xs text-slate-400">Published: {date}</p>
+          <p className="text-md text-slate-500 font-semibold">{book?.title}</p>
+          <p className="text-sm text-slate-500 font-semibold">{book?.author}</p>
+          <h4 className="text-sm text-slate-500 font-semibold">
+            {book?.genre}
+          </h4>
         </div>
         <div
           onClick={handleWishList}
-          className="btn btn-sm rounded-sm bg-purple-300 font-semibold w-full"
+          className="btn btn-sm rounded-t-sm bg-purple-300 font-semibold w-full"
         >
           {payload}
         </div>

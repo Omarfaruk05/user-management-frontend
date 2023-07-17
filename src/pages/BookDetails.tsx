@@ -55,9 +55,9 @@ const BookDetails = () => {
   return (
     <div>
       {book && (
-        <div className="max-w-7xl mx-auto px-2">
+        <div className="max-w-7xl mx-auto px-2 mt-4">
           <div className="md:flex gap-4">
-            <div className="bg-slate-200  md:w-1/3 flex justify-center">
+            <div className="bg-slate-200  md:w-1/3 min-h-[450px] flex justify-center">
               <img src={book?.image} alt="book photo" />
             </div>
             <div className="md:w-2/3 mt-12 mx-4">
@@ -89,24 +89,26 @@ const BookDetails = () => {
                     </button>
                   </>
                 )}
-                <button
-                  onClick={handleWishList}
-                  className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600"
-                >
-                  Add To Wishlist
-                </button>
+                {user?.email && (
+                  <button
+                    onClick={handleWishList}
+                    className="btn text-white mr-2 px-12 mb-2 bg-slate-500 hover:bg-slate-600"
+                  >
+                    Add To Wishlist
+                  </button>
+                )}
               </div>
             </div>
           </div>
           <div className=" ml-4 mt-8 mb-4">
-            <h2 className="text-2xl font-bold mb-3">Reviews:</h2>
+            <h2 className="text-2xl font-bold mb-3 font-serif">Reviews:</h2>
             <div className="form-control">
               <div className="input-group">
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <input
                     placeholder="Your Regiew"
                     type="text"
-                    className="input input-bordered"
+                    className="input input-bordered mr-2"
                     {...register("review")}
                   />
                   <input

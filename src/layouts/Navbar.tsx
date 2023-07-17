@@ -47,13 +47,13 @@ const Navbar = () => {
           <div className="flex items-center">
             {user.email && (
               <Link to="/create-book">
-                <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
+                <button className="btn btn-sm rounded-md text-white bg-teal-700 hover:bg-teal-800 mr-2 hover:bg-gray-700">
                   Create Book
                 </button>
               </Link>
             )}
             <Link to="/all-books">
-              <button className="btn btn-sm rounded-md text-white bg-gray-600 mr-2 hover:bg-gray-700">
+              <button className="btn btn-sm rounded-md text-white bg-teal-700 hover:bg-teal-800 mr-2 hover:bg-gray-700">
                 All Books
               </button>
             </Link>
@@ -65,7 +65,7 @@ const Navbar = () => {
                   </button>
                 </Link>
                 <Link to="/login">
-                  <button className="btn btn-sm rounded-md text-white bg-teal-700 mr-2 hover:bg-teal-800">
+                  <button className="btn btn-sm rounded-md text-white bg-violet-800 mr-2 hover:bg-violet-900">
                     Login
                   </button>
                 </Link>

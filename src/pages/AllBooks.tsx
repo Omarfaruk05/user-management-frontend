@@ -6,6 +6,7 @@ import { IBook } from "../components/BestBooks";
 import { useForm } from "react-hook-form";
 
 const AllBooks = () => {
+  const [showFilter, setShowFilter] = useState(false);
   const [comic, setComic] = useState(false);
   const [fiction, setFiction] = useState(false);
   const [novel, setNovel] = useState(false);
@@ -14,7 +15,7 @@ const AllBooks = () => {
   const [searchData, setSearchData] = useState("");
   console.log(publicationYear);
 
-  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
   const handleComic = () => {
     setGenre("comic");
@@ -57,111 +58,99 @@ const AllBooks = () => {
   const books = data?.data;
   return (
     <div>
-      <div className="max-w-7xl mx-auto px-4 pt-8 pb-4 min-h-[70vh]">
+      <div className="min-h-[70vh]">
         <div>
-          <div>
-            <div className="mb-8 flex gap-4 justify-center">
+          <div className="bg-[#fbf9f8] pt-4 pb-1">
+            <div className="mb-2 flex gap-2 justify-center">
               {/* searching  */}
-              <div className="form-control w-2/5">
+              <div className="form-control">
                 <div className="input-group">
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(onSubmit)} className="flex">
                     <input
                       type="text"
-                      className="input input-bordered"
+                      className="input input-bordered mr-2 md:w-96"
                       {...register("search")}
                     />
                     <input
                       type="submit"
                       value={"search"}
-                      className="btn bg-purple-300"
-                    />
+                      className="btn bg-teal-600 text-white"
+                    ></input>
                   </form>
                 </div>
               </div>
               {/* filtering  */}
               <div>
-                <div className="dropdown  dropdown-end">
-                  <label
-                    tabIndex={0}
-                    className="btn bg-gray-500 text-white hover:bg-gray-600"
-                  >
-                    Filter By Genre
-                  </label>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-96 "
-                  >
-                    <div className="grid grid-cols-2 gap-4 p-2">
-                      <div>
-                        <h2 className="text-xl font-semibold">Genre</h2>
-                        <hr />
-                        <div className="form-control w-16">
-                          <label className="cursor-pointer label">
-                            <span className="label-text  btn btn-sm mr-1">
-                              Comic
-                            </span>
-                            <input
-                              onClick={handleComic}
-                              type="checkbox"
-                              checked={comic}
-                              className="checkbox checkbox-success"
-                            />
-                          </label>
-                        </div>
-                        <div className="form-control w-16">
-                          <label className="cursor-pointer label">
-                            <span className="label-text  btn btn-sm mr-1">
-                              Fiction
-                            </span>
-                            <input
-                              onClick={handleFiction}
-                              type="checkbox"
-                              checked={fiction}
-                              className="checkbox checkbox-success"
-                            />
-                          </label>
-                        </div>
-                        <div className="form-control w-16">
-                          <label className="cursor-pointer label">
-                            <span className="label-text  btn btn-sm mr-1 btn">
-                              Novel
-                            </span>
-                            <input
-                              onClick={handleNovel}
-                              type="checkbox"
-                              checked={novel}
-                              className="checkbox checkbox-success"
-                            />
-                          </label>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="text-xl font-semibold">
-                          Publication Year
-                        </h4>
-                        <hr />
-                        <div>
-                          <input
-                            onChange={(e) => setPublicationYear(e.target.value)}
-                            value={publicationYear}
-                            className="input input-bordered input-sm mt-1"
-                            type="number"
-                          />
-                        </div>
-
-                        <div>
-                          <button className="btn btn-sm bg-teal-500 text-white hover:bg-teal-600 w-full mt-20">
-                            Filter
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </ul>
+                <div
+                  onClick={() => setShowFilter(!showFilter)}
+                  className="btn bg-gray-600 text-white hover:bg-gray-700"
+                >
+                  Filter
                 </div>
               </div>
             </div>
           </div>
-          <div className="mx-auto">
+          <div className={showFilter ? "block bg-[#fbf9f8] mb-4 " : "hidden "}>
+            <div className="flex justify-center gap-4 p-2">
+              <div>
+                <h2 className="text-xl font-semibold">Genre</h2>
+                <hr />
+                <div className="form-control">
+                  <label className="cursor-pointer label">
+                    <span className="label-text btn btn-sm mr-2 -ml-2">
+                      Comic
+                    </span>
+                    <input
+                      onClick={handleComic}
+                      type="checkbox"
+                      checked={comic}
+                      className="checkbox checkbox-success"
+                    />
+                  </label>
+                </div>
+                <div className="form-control w-16">
+                  <label className="cursor-pointer label">
+                    <span className="label-text  btn btn-sm mr-2 -ml-2">
+                      Fiction
+                    </span>
+                    <input
+                      onClick={handleFiction}
+                      type="checkbox"
+                      checked={fiction}
+                      className="checkbox checkbox-success"
+                    />
+                  </label>
+                </div>
+                <div className="form-control w-16">
+                  <label className="cursor-pointer label">
+                    <span className="label-text  btn btn-sm mr-2 -ml-2 btn">
+                      Novel
+                    </span>
+                    <input
+                      onClick={handleNovel}
+                      type="checkbox"
+                      checked={novel}
+                      className="checkbox checkbox-success"
+                    />
+                  </label>
+                </div>
+              </div>
+              <div className="w-[1px] mt-7 ml-12 bg-gray-300 rounded-full"></div>
+              <div className="">
+                <h4 className="text-xl font-semibold">Publication Year</h4>
+                <hr />
+                <div>
+                  <input
+                    onChange={(e) => setPublicationYear(e.target.value)}
+                    value={publicationYear}
+                    className="input input-bordered input-sm mt-1"
+                    type="number"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-7xl mx-auto my-4">
             <div className="flex  gap-4 justify-center  items-center flex-wrap">
               {isLoading &&
                 nums.map((x) => <LoadingCart key={x}></LoadingCart>)}

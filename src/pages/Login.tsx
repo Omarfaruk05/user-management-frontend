@@ -38,9 +38,9 @@ const Login = () => {
   }, [user.email, isLoading]);
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[95vh]">
-        <div className="bg-[#e0e6f0] text-center hidden md:block md:h-full  md:flex justify-center items-center px-4 ">
-          <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[93vh]">
+        <div className="bg-[#e0e6f0] text-center hidden md:block md:h-full  md:flex justify-center items-center px-4">
+          <div className="-mt-12">
             <h1 className="text-4xl font-bold font-serif mb-5">
               Wellcome agani to{" "}
               <span className="text-teal-900">Book Haven.</span>
@@ -54,12 +54,15 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <div className="text-center mx-12">
-          <h1 className="text-4xl font-bold font-serif mb-12">Login</h1>
+        <div className="text-center mx-8 -mt-24">
+          <h1 className="text-4xl font-bold font-serif mb-8">Login</h1>
 
           {/* form  */}
           <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="md:w-80 lg:w-96 mx-auto "
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div>
                 <p className="text-start text-gray-500 font-semibold ml-2">
                   Enter Email

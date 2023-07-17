@@ -36,7 +36,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/update-book/:id",
-        element: <UpdateBook />,
+        element: (
+          <PrivateRoute>
+            <UpdateBook />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/book-details/:id",
@@ -52,15 +56,27 @@ const routes = createBrowserRouter([
       },
       {
         path: "/wish-list",
-        element: <WishList />,
+        element: (
+          <PrivateRoute>
+            <WishList />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/reading",
-        element: <Reading />,
+        element: (
+          <PrivateRoute>
+            <Reading />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/finished",
-        element: <Finished />,
+        element: (
+          <PrivateRoute>
+            <Finished />
+          </PrivateRoute>
+        ),
       },
     ],
   },
