@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 const AllBooks = () => {
   const [showFilter, setShowFilter] = useState(false);
+  const [clear, setClear] = useState(false);
   const [comic, setComic] = useState(false);
   const [fiction, setFiction] = useState(false);
   const [novel, setNovel] = useState(false);
@@ -17,22 +18,32 @@ const AllBooks = () => {
 
   const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
+  const handleClear = () => {
+    setGenre("");
+    setComic(false);
+    setFiction(false);
+    setNovel(false);
+    setClear(true);
+  };
   const handleComic = () => {
     setGenre("comic");
     setComic(true);
     setFiction(false);
     setNovel(false);
+    setClear(false);
   };
   const handleFiction = () => {
     setGenre("fiction");
     setComic(false);
     setFiction(true);
+    setClear(false);
     setNovel(false);
   };
   const handleNovel = () => {
     setGenre("novel");
     setComic(false);
     setFiction(false);
+    setClear(false);
     setNovel(true);
   };
 
@@ -95,7 +106,20 @@ const AllBooks = () => {
               <div>
                 <h2 className="text-xl font-semibold">Genre</h2>
                 <hr />
-                <div className="form-control">
+                <div className="form-control w-16">
+                  <label className="cursor-pointer label">
+                    <span className="label-text btn btn-sm bg-teal-500 text-white mr-2 -ml-2">
+                      Clear
+                    </span>
+                    <input
+                      onClick={handleClear}
+                      type="checkbox"
+                      checked={clear}
+                      className="checkbox checkbox-success"
+                    />
+                  </label>
+                </div>
+                <div className="form-control w-16">
                   <label className="cursor-pointer label">
                     <span className="label-text btn btn-sm mr-2 -ml-2">
                       Comic

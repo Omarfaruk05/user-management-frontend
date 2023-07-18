@@ -83,7 +83,7 @@ const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
         </div>
         <div
           onClick={handleWishList}
-          className="btn btn-sm rounded-t-sm bg-purple-300 font-semibold w-full"
+          className="btn btn-sm rounded-t-sm bg-teal-700 hover:bg-teal-800 text-white font-semibold w-full"
         >
           {payload}
         </div>

@@ -1,5 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  useDeleteBookMutation,
   useGetSingleBookQuery,
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
@@ -13,6 +14,7 @@ interface IComment {
 }
 
 const BookDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { data } = useGetSingleBookQuery(id);
@@ -21,6 +23,7 @@ const BookDetails = () => {
   const [updateBookMutation, {}] = useUpdateBookMutation();
 
   const [updateUserMutation, {}] = useUpdateUserMutation();
+  const [deleteBookMutation, {}] = useDeleteBookMutation();
 
   const book = data?.data;
   let date;
@@ -50,6 +53,16 @@ const BookDetails = () => {
     console.log(updatedData);
     updateBookMutation(updatedData);
     reset();
+  };
+
+  const handleDelete = () => {
+    const deletedData = {
+      id: book?._id,
+      email: user?.email,
+    };
+
+    deleteBookMutation(deletedData);
+    navigate("/");
   };
 
   return (
@@ -84,9 +97,12 @@ const BookDetails = () => {
                         Edite Book
                       </button>
                     </Link>
-                    <button className="btn text-white mr-2 px-[60px] mb-2 bg-red-500 hover:bg-red-600">
+                    <label
+                      className="btn text-white mr-2 px-[60px] mb-2 bg-red-500 hover:bg-red-600"
+                      htmlFor="my_modal"
+                    >
                       Delete Book
-                    </button>
+                    </label>
                   </>
                 )}
                 {user?.email && (
@@ -98,6 +114,36 @@ const BookDetails = () => {
                   </button>
                 )}
               </div>
+              {/* modal part start here  */}
+              <input type="checkbox" id="my_modal" className="modal-toggle" />
+              <div className="modal">
+                <div className="modal-box">
+                  <h3 className="font-bold text-lg text-red-500">Alart</h3>
+                  <p className="py-4">
+                    Are you sure that you want to{" "}
+                    <span className="text-red-500 font-semibold uppercase">
+                      delete
+                    </span>{" "}
+                    the book?
+                  </p>
+                  <div className="modal-action">
+                    <label
+                      htmlFor="my_modal"
+                      className="btn btn-sm rounded-md bg-teal-700 text-white"
+                    >
+                      Cancel
+                    </label>
+                    <label
+                      onClick={handleDelete}
+                      htmlFor="my_modal"
+                      className="btn btn-sm rounded-md bg-red-500 text-white"
+                    >
+                      Delete
+                    </label>
+                  </div>
+                </div>
+              </div>
+              {/* modal part end here  */}
             </div>
           </div>
           <div className=" ml-4 mt-8 mb-4">

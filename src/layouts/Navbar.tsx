@@ -85,23 +85,23 @@ const Navbar = () => {
                   className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <Link to="wish-list">
-                    <li>
+                    <li className="font-semibold bg-gray-100 rounded-md mb-1">
                       <a>Wish List</a>
                     </li>
                   </Link>
                   <Link to="reading">
-                    <li>
+                    <li className="font-semibold bg-gray-100 rounded-md mb-1">
                       <a>Reading</a>
                     </li>
                   </Link>
                   <Link to="finished">
-                    <li>
+                    <li className="font-semibold bg-gray-100 rounded-md mb-1">
                       <a>Finished</a>
                     </li>
                   </Link>
                   <li
                     onClick={handleLogOut}
-                    className="btn text-white btn-sm w-full bg-teal-500 hover:bg-teal-600 mt-1"
+                    className="btn text-white btn-sm w-full bg-teal-700 hover:bg-teal-600 mt-1"
                   >
                     LogOut
                   </li>

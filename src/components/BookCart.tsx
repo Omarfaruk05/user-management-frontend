@@ -57,7 +57,7 @@ const BookCart = (book: IBook) => {
         {user?.email && (
           <div
             onClick={handleWishList}
-            className="btn btn-sm rounded-t-sm bg-purple-300 font-semibold w-full"
+            className="btn btn-sm rounded-t-sm bg-teal-600 text-white hover:bg-real-800 font-semibold w-full"
           >
             Make WishList
           </div>
