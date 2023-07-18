@@ -139,11 +139,10 @@ const UpdateBook = () => {
                   Update Publication Time
                 </p>
                 <input
-                  type="number"
+                  type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="YY-MM-DD"
                   {...register("publicationTime", {
-                    valueAsNumber: true,
                     required: "Publication Time is required",
                   })}
                   defaultValue={book?.publicationTime}
