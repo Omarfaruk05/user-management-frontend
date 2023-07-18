@@ -11,6 +11,7 @@ import {
 } from "../redux/features/finished/finishedSlice";
 import { useAppSelector } from "../redux/hook";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
+import { toast } from "react-toastify";
 
 interface IBook {
   _id: string;
@@ -49,6 +50,7 @@ const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
         reading: [book?._id],
       };
       updateUserMutation(updatedData);
+      toast.success("Book is added in Reading");
     }
     if (payload === "Make Finished") {
       dispatch(removeFromReading(book));
@@ -58,9 +60,11 @@ const WishListBook: React.FC<MyComponentProps> = ({ book, payload }) => {
         finished: [book?._id],
       };
       updateUserMutation(updatedData);
+      toast.success("Book is added in Finished");
     }
     if (payload === "Remove") {
       dispatch(removeFromFinished(book));
+      toast.success("Remove is successfull.");
     }
   };
 

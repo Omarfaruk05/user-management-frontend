@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { loginUser } from "../redux/features/user/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useEffect } from "react";
 
 interface IFormInput {
@@ -31,6 +32,12 @@ const Login = () => {
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
 
+  if (!user?.email) {
+    toast.error(error);
+  }
+  if (user?.email) {
+    toast.success("User Loged in Successfull.");
+  }
   useEffect(() => {
     if (user.email && !isLoading) {
       navigate(from, { replace: true });

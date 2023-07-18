@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useCreateUserMutation } from "../redux/features/user/userApi";
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface IFormInput {
   fullName: string;
@@ -17,7 +18,7 @@ const SignUp = () => {
   const dispatch = useAppDispatch();
   let from = location.state?.from?.pathname || "/";
 
-  const [createUserMutation, {}] = useCreateUserMutation();
+  const [createUserMutation] = useCreateUserMutation();
 
   const { user, isLoading, isError, error } = useAppSelector(
     (state) => state.user
@@ -34,12 +35,19 @@ const SignUp = () => {
       createUserMutation(data);
     }
   };
+  if (isError) {
+    toast.error(error);
+  }
+  if (user?.email) {
+    toast.success("User Created Successfull.");
+  }
 
   useEffect(() => {
     if (user.email && !isLoading) {
       navigate(from, { replace: true });
     }
   }, [user.email, isLoading]);
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 items-center h-[93vh]">

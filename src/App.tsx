@@ -4,6 +4,8 @@ import { useAppDispatch } from "./redux/hook";
 import { auth } from "./lib/fitebase";
 import { setLoading, setUser } from "./redux/features/user/userSlice";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -19,7 +21,7 @@ function App() {
   }, []);
   return (
     <div>
-      {/* <Toaster /> */}
+      <ToastContainer />
       <MainLayout />
     </div>
   );

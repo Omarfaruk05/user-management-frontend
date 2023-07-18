@@ -5,6 +5,7 @@ import {
   useUpdateBookMutation,
 } from "../redux/features/books/bookApi";
 import { useAppSelector } from "../redux/hook";
+import { toast } from "react-toastify";
 
 interface IFormInput {
   email: string | null;
@@ -21,7 +22,7 @@ const UpdateBook = () => {
 
   const { user } = useAppSelector((state) => state.user);
 
-  const [updateBookMutation, {}] = useUpdateBookMutation();
+  const [updateBookMutation, result] = useUpdateBookMutation();
 
   const { data } = useGetSingleBookQuery(id);
   const book = data?.data;
@@ -44,6 +45,12 @@ const UpdateBook = () => {
     });
     reset();
   };
+  if (result?.isError) {
+    toast.error("Invalide Type Error.");
+  }
+  if (result?.isSuccess) {
+    toast.success(result?.data?.message);
+  }
   return (
     <div>
       <div className="max-w-7xl mx-auto mb-8 mt-2">
@@ -132,10 +139,11 @@ const UpdateBook = () => {
                   Update Publication Time
                 </p>
                 <input
-                  type="text"
+                  type="number"
                   className="input input-bordered w-96 mb-3"
-                  placeholder="Publication Time"
+                  placeholder="YY-MM-DD"
                   {...register("publicationTime", {
+                    valueAsNumber: true,
                     required: "Publication Time is required",
                   })}
                   defaultValue={book?.publicationTime}

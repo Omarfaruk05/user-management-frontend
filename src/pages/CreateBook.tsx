@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useCreateBookMutation } from "../redux/features/books/bookApi";
 import { useAppSelector } from "../redux/hook";
+import { toast } from "react-toastify";
 
 interface IFormInput {
   image: string;
@@ -14,7 +15,7 @@ interface IFormInput {
 const CreateBook = () => {
   const { user } = useAppSelector((state) => state.user);
 
-  const [createBookMutation, {}] = useCreateBookMutation();
+  const [createBookMutation, result] = useCreateBookMutation();
 
   const {
     register,
@@ -23,11 +24,16 @@ const CreateBook = () => {
     reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
-
     createBookMutation(data);
     reset();
   };
+  if (result?.isError) {
+    toast.error("Invalide Type Error.");
+  }
+  if (result?.isSuccess) {
+    toast.success(result?.data?.message);
+  }
+
   return (
     <div>
       <div className="max-w-7xl mx-auto mb-8 mt-2">
@@ -133,7 +139,7 @@ const CreateBook = () => {
                 <input
                   type="text"
                   className="input input-bordered w-96 mb-3"
-                  placeholder="Publication Time"
+                  placeholder="YY-MM-DD"
                   {...register("publicationTime", {
                     required: "Pbulication time is required",
                   })}

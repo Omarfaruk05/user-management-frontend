@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
 import { addToWishList } from "../redux/features/wishList/wishListSlice";
+import { toast } from "react-toastify";
 
 interface IBook {
   _id: string;
@@ -33,6 +34,7 @@ const BookCart = (book: IBook) => {
       wishList: [book?._id],
     };
     updateUserMutation(updatedData);
+    toast.success("Book is added in Wishlist");
   };
 
   return (

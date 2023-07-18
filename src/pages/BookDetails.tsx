@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { useForm } from "react-hook-form";
 import { addToWishList } from "../redux/features/wishList/wishListSlice";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
+import { toast } from "react-toastify";
 
 interface IComment {
   review: string;
@@ -23,7 +24,7 @@ const BookDetails = () => {
   const [updateBookMutation, {}] = useUpdateBookMutation();
 
   const [updateUserMutation, {}] = useUpdateUserMutation();
-  const [deleteBookMutation, {}] = useDeleteBookMutation();
+  const [deleteBookMutation, result] = useDeleteBookMutation();
 
   const book = data?.data;
   let date;
@@ -38,6 +39,7 @@ const BookDetails = () => {
       wishList: book?._id,
     };
     updateUserMutation(updatedData);
+    toast.success("Book is added in Wishlist");
   };
 
   const { register, handleSubmit, reset } = useForm<IComment>();
@@ -62,7 +64,11 @@ const BookDetails = () => {
     };
 
     deleteBookMutation(deletedData);
+
+    toast(data?.data?.message);
+
     navigate("/");
+    console.log(result);
   };
 
   return (
