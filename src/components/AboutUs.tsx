@@ -32,6 +32,7 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      {/* explor part  */}
       <div>
         <h1 className="text-4xl font-serif font-semibold text-center py-10">
           Explore every topic and idea
@@ -82,6 +83,67 @@ const AboutUs = () => {
               <p className="mt-8">
                 It’s free to upload your documents to Scribd, giving you access
                 to a global community of readers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* deep green part  */}
+      <div className="bg-teal-800 text-white">
+        <div className="max-w-7xl mx-auto py-4">
+          <div className="text-center mx-2 md:w-[700px] md:mx-auto">
+            <h1 className="text-3xl my-7 font-semibold font-serif">
+              At Book Heaven, we believe in the power of the written (and
+              spoken) word
+            </h1>
+            <p className="mx-2 md:mx-10">
+              You may be a reader or a writer. You may be looking for a specific
+              document or to improve your life personally or professionally. No
+              matter what your goals are, we support you.
+            </p>
+          </div>
+          <p className="h-[1px] bg-white my-10 mx-2 md:w-[680px] md:mx-auto"></p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mx-2 md:w-[680px] md:mx-auto pb-8">
+            <div>
+              <h5 className="my-3 text-2xl font-semibold">Our Mission</h5>
+              <p>
+                We believe that reading opens doors, and part of our mission is
+                to change the way the world reads by providing a wide range of
+                reading material at a price that is fair for both creators and
+                consumers.
+              </p>
+            </div>
+            <div>
+              <h5 className="my-3 text-2xl font-semibold">
+                Community publishing
+              </h5>
+              <p>
+                Scribd started as an open publishing platform, a place where
+                anyone can share their ideas with the world, quickly, easily,
+                and for free.
+              </p>
+            </div>
+            <div>
+              <h5 className="my-3 text-2xl font-semibold">
+                Protecting intellectual property
+              </h5>
+              <p>
+                We take copyrights seriously. We continue to protect the rights
+                of authors, publishers, and creators by acting quickly on valid
+                notifications of copyright infringement. We also have a rapid
+                response group to respond to take down requests.
+              </p>
+            </div>
+            <div>
+              <h5 className="my-3 text-2xl font-semibold">
+                Supporting authors
+              </h5>
+              <p>
+                Your subscription payments allow us to pay our staff and the
+                creators who make Scribd possible. We keep the price low by
+                minimizing our advertising costs. We rely on our community of
+                subscribers and creators to spread the word about the quality
+                and value that we provide.
               </p>
             </div>
           </div>

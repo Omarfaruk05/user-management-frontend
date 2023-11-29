@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { FcBusinessman } from "react-icons/Fc";

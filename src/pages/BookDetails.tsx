@@ -1,3 +1,11 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable no-empty-pattern */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useDeleteBookMutation,
@@ -72,7 +80,7 @@ const BookDetails = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-[50vh]">
       {book && (
         <div className="max-w-7xl mx-auto px-2 mt-4">
           <div className="md:flex gap-4">

@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { useState } from "react";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import LoadingCart from "../components/LoadingCart";
 import BookCart from "../components/BookCart";
 import { IBook } from "../components/BestBooks";
 import { useForm } from "react-hook-form";
+import ScrollToTop from "../components/ScrollToTop";
 
 const AllBooks = () => {
   const [showFilter, setShowFilter] = useState(false);
@@ -68,6 +74,7 @@ const AllBooks = () => {
   const books = data?.data;
   return (
     <div>
+      <ScrollToTop />
       <div className="min-h-[70vh]">
         <div>
           <div className="bg-[#fbf9f8] pt-4 pb-1">
@@ -177,7 +184,7 @@ const AllBooks = () => {
               {isLoading &&
                 nums.map((x) => <LoadingCart key={x}></LoadingCart>)}
               {books &&
-                books.map((book: IBook) => (
+                books?.map((book: IBook) => (
                   <BookCart {...book} key={book._id}></BookCart>
                 ))}
             </div>

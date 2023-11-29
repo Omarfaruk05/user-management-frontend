@@ -6,6 +6,7 @@ import { setLoading, setUser } from "./redux/features/user/userSlice";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ function App() {
   }, []);
   return (
     <div>
+      <ScrollToTop />
       <ToastContainer />
       <MainLayout />
     </div>
