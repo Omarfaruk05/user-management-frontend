@@ -7,7 +7,7 @@ const GetApp = () => {
     <div className="bg-[#fbf9f8]">
       <div className="max-w-7xl mx-2 md:w-[800px] md:mx-auto md:flex gap-8 py-12 items-center">
         <div className="mb-12 text-center md:text-start w-96 md:w-full mx-auto">
-          <h2 className="text-xl font-semibold">Get the Book Heaven app</h2>
+          <h2 className="text-xl font-semibold">Get the Book Haven app</h2>
           <p>
             Use Scribd through any web browser, Android, or iOS device. Download
             for offline access. Install the apps to try them out:

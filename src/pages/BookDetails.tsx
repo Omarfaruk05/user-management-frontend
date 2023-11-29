@@ -17,6 +17,8 @@ import { useForm } from "react-hook-form";
 import { addToWishList } from "../redux/features/wishList/wishListSlice";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
 import { toast } from "react-toastify";
+import RelatedBooks from "./RelatedBooks";
+import ScrollToTop from "../components/ScrollToTop";
 
 interface IComment {
   review: string;
@@ -81,13 +83,14 @@ const BookDetails = () => {
 
   return (
     <div className="min-h-[50vh]">
-      {book && (
+      <ScrollToTop />
+      {book ? (
         <div className="max-w-7xl mx-auto px-2 mt-4">
-          <div className="md:flex gap-4">
-            <div className="bg-slate-200  md:w-1/3 min-h-[450px] flex justify-center">
-              <img src={book?.image} alt="book photo" />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 justify-center">
+            <div className="bg-slate-200 rounded-md min-h-[450px] flex justify-center">
+              <img className="rounded-md" src={book?.image} alt="book photo" />
             </div>
-            <div className="md:w-2/3 mt-12 mx-4">
+            <div className="text-center lg:text-start">
               <div>
                 <h4 className="text-2xl font-semibold ">
                   Title: {book?.title}{" "}
@@ -159,8 +162,9 @@ const BookDetails = () => {
               </div>
               {/* modal part end here  */}
             </div>
+            <RelatedBooks genre={book?.genre} />
           </div>
-          <div className=" ml-4 mt-8 mb-4">
+          <div className=" mt-8 mb-4">
             <h2 className="text-2xl font-bold mb-3 font-serif">Reviews:</h2>
             <div className="form-control">
               <div className="input-group">
@@ -186,6 +190,15 @@ const BookDetails = () => {
                 </span>
               </p>
             ))}
+          </div>
+        </div>
+      ) : (
+        <div className="min-h-[70vh] flex justify-center items-center">
+          <div>
+            <span className="loading loading-ball loading-xs"></span>
+            <span className="loading loading-ball loading-sm"></span>
+            <span className="loading loading-ball loading-md"></span>
+            <span className="loading loading-ball loading-lg"></span>
           </div>
         </div>
       )}

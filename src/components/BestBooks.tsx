@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Link } from "react-router-dom";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import BookCart from "./BookCart";

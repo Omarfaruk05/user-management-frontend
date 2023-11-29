@@ -12,7 +12,7 @@ const AboutUs = () => {
             What is Hook Heaven?
           </h1>
           <p className="w-96 text-center mx-auto">
-            Book Heaven is a digital document library, with over 170M documents
+            Book Haven is a digital document library, with over 170M documents
             and counting. Find and upload text on every topic and niche — all
             for one monthly subscription.
           </p>
@@ -93,8 +93,8 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto py-4">
           <div className="text-center mx-2 md:w-[700px] md:mx-auto">
             <h1 className="text-3xl my-7 font-semibold font-serif">
-              At Book Heaven, we believe in the power of the written (and
-              spoken) word
+              At Book Haven, we believe in the power of the written (and spoken)
+              word
             </h1>
             <p className="mx-2 md:mx-10">
               You may be a reader or a writer. You may be looking for a specific

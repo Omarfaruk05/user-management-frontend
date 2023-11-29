@@ -1,3 +1,5 @@
+/* eslint-disable no-empty-pattern */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../redux/hook";
@@ -47,9 +49,7 @@ const BookCart = (book: IBook) => {
           </div>
         </Link>
         <div className="px-2">
-          <p className="text-xs text-slate-400 text-gray-500">
-            Published: {date}
-          </p>
+          <p className="text-xs text-slate-400">Published: {date}</p>
           <p className="text-md text-slate-500 font-semibold">{book?.title}</p>
           <p className="text-sm text-slate-500 font-semibold">{book?.author}</p>
           <h4 className="text-sm text-slate-500 font-semibold">
