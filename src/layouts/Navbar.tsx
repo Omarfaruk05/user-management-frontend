@@ -16,26 +16,10 @@ const Navbar = () => {
   };
   return (
     <div className="bg-[#f8f4f2] py-1 sticky top-0 z-20">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <div className="flex-none">
-              <label htmlFor="my-drawer" className="btn btn-link text-gray-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block w-6 h-6 stroke-current"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
-              </label>
-            </div>
+            <div className="flex-none">{/* logo  */}</div>
             <div>
               <Link to="/">
                 <h3 className="text-2xl font-semibold text-teal-800 font-mono">

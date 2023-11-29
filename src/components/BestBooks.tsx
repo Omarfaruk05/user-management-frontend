@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useGetBooksQuery } from "../redux/features/books/bookApi";
 import BookCart from "./BookCart";
 import LoadingCart from "./LoadingCart";
@@ -16,7 +17,7 @@ export interface IBook {
 const BestBooks = () => {
   const nums = [1, 2, 3, 4, 5, 6, 7];
   const { data, isLoading } = useGetBooksQuery({
-    limit: 10,
+    limit: 7,
     searchTerm: "",
     genre: "",
     publicationTime: "",
@@ -35,9 +36,16 @@ const BestBooks = () => {
               {isLoading &&
                 nums.map((x) => <LoadingCart key={x}></LoadingCart>)}
               {books &&
-                books.map((book: IBook) => (
+                books?.map((book: IBook) => (
                   <BookCart {...book} key={book._id}></BookCart>
                 ))}
+            </div>
+            <div className="text-center">
+              <Link to={"all-books"}>
+                <button className="border py-1 px-2 font-semibold rounded-sm border-teal-600 transition-all hover:border-2 hover:rounded-md my-4 h-9">
+                  See more
+                </button>
+              </Link>
             </div>
           </div>
         </div>

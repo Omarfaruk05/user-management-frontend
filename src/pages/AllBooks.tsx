@@ -58,7 +58,6 @@ const AllBooks = () => {
     setSearchData(search);
   };
   const payload = {
-    limit: "",
     searchTerm: searchData,
     genre: genre,
     publicationTime: publicationYear,
@@ -102,73 +101,72 @@ const AllBooks = () => {
             </div>
           </div>
           <div className={showFilter ? "block bg-[#fbf9f8] mb-4 " : "hidden "}>
-            <div className="flex justify-center gap-4 p-2">
+            <div className="flex flex-col md:flex-row justify-center items-center md:gap-2 p-2">
               <div>
-                <h2 className="text-xl font-semibold">Genre</h2>
-                <hr />
-                <div className="form-control w-16">
-                  <label className="cursor-pointer label">
-                    <span className="label-text btn btn-sm bg-teal-500 text-white mr-2 -ml-2">
-                      Clear
-                    </span>
-                    <input
-                      onClick={handleClear}
-                      type="checkbox"
-                      checked={clear}
-                      className="checkbox checkbox-success"
-                    />
-                  </label>
-                </div>
-                <div className="form-control w-16">
-                  <label className="cursor-pointer label">
-                    <span className="label-text btn btn-sm mr-2 -ml-2">
-                      Comic
-                    </span>
-                    <input
-                      onClick={handleComic}
-                      type="checkbox"
-                      checked={comic}
-                      className="checkbox checkbox-success"
-                    />
-                  </label>
-                </div>
-                <div className="form-control w-16">
-                  <label className="cursor-pointer label">
-                    <span className="label-text  btn btn-sm mr-2 -ml-2">
-                      Fiction
-                    </span>
-                    <input
-                      onClick={handleFiction}
-                      type="checkbox"
-                      checked={fiction}
-                      className="checkbox checkbox-success"
-                    />
-                  </label>
-                </div>
-                <div className="form-control w-16">
-                  <label className="cursor-pointer label">
-                    <span className="label-text  btn btn-sm mr-2 -ml-2 btn">
-                      Novel
-                    </span>
-                    <input
-                      onClick={handleNovel}
-                      type="checkbox"
-                      checked={novel}
-                      className="checkbox checkbox-success"
-                    />
-                  </label>
+                <div className="flex flex-wrap gap-7">
+                  <div className="form-control w-16">
+                    <label className="cursor-pointer label">
+                      <span className="label-text btn btn-xs rounded-md bg-teal-500 text-white mr-2 -ml-2">
+                        Clear
+                      </span>
+                      <input
+                        onClick={handleClear}
+                        type="checkbox"
+                        checked={clear}
+                        className="checkbox checkbox-xs checkbox-success"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-control w-16">
+                    <label className="cursor-pointer label">
+                      <span className="label-text btn btn-xs rounded-md mr-2 -ml-2">
+                        Comic
+                      </span>
+                      <input
+                        onClick={handleComic}
+                        type="checkbox"
+                        checked={comic}
+                        className="checkbox checkbox-xs checkbox-success"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-control w-16">
+                    <label className="cursor-pointer label">
+                      <span className="label-text  btn btn-xs rounded-md mr-2 -ml-2">
+                        Fiction
+                      </span>
+                      <input
+                        onClick={handleFiction}
+                        type="checkbox"
+                        checked={fiction}
+                        className="checkbox checkbox-xs checkbox-success"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-control w-16">
+                    <label className="cursor-pointer label">
+                      <span className="label-text  btn btn-xs rounded-md mr-2 -ml-2">
+                        Novel
+                      </span>
+                      <input
+                        onClick={handleNovel}
+                        type="checkbox"
+                        checked={novel}
+                        className="checkbox checkbox-success checkbox-xs"
+                      />
+                    </label>
+                  </div>
                 </div>
               </div>
-              <div className="w-[1px] mt-7 ml-12 bg-gray-300 rounded-full"></div>
+              <div className=" md:ml-12 bg-gray-300 rounded-full"></div>
               <div className="">
-                <h4 className="text-xl font-semibold">Publication Year</h4>
-                <hr />
                 <div>
                   <input
                     onChange={(e) => setPublicationYear(e.target.value)}
                     value={publicationYear}
                     className="input input-bordered input-sm mt-1"
                     type="number"
+                    placeholder="Publication Year"
                   />
                 </div>
               </div>

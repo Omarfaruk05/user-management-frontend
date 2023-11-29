@@ -1,3 +1,4 @@
+import AboutUs from "../components/AboutUs";
 import Banner from "../components/Banner";
 import BestBooks from "../components/BestBooks";
 import Subscription from "../components/Subscription";
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <Subscription />
       <BestBooks />
+      <AboutUs />
     </div>
   );
 };
