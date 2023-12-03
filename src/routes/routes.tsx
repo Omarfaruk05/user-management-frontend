@@ -4,6 +4,8 @@ import NotFound from "../pages/NotFound";
 import Home from "../pages/Home";
 import CreateUser from "../pages/CreateUser";
 import AllTeam from "../pages/AllTeam";
+import UpdateUser from "../pages/UpdateUser";
+import CreateTeam from "../pages/CreateTeam";
 
 const routes = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const routes = createBrowserRouter([
       {
         path: "/create-user",
         element: <CreateUser />,
+      },
+      {
+        path: "/create-team",
+        element: <CreateTeam />,
+      },
+      {
+        path: "/update-user/:id",
+        element: <UpdateUser />,
       },
       {
         path: "/team",

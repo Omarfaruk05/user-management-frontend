@@ -18,8 +18,8 @@ interface IFormInput {
 
 const CreateUser = () => {
   const [available, setAvailable] = useState(true);
-  const [gender, setGender] = useState("Male");
-
+  const [gender, setGender] = useState("");
+  const [domain, setDomain] = useState("");
   const [createUserMutation] = useCreateUserMutation();
 
   const {
@@ -28,15 +28,15 @@ const CreateUser = () => {
     handleSubmit,
     reset,
   } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = async (data: IUser) => {
+  const onSubmit: SubmitHandler<IFormInput> = async (formData: IUser) => {
     try {
-      data.available = available;
-      data.gender = gender;
-      console.log(data);
+      formData.available = available;
+      formData.gender = gender;
+      formData.domain = domain;
 
-      const result = await createUserMutation(data);
-      if (result.data.data._id as string) {
-        toast.success(result.data.message as string);
+      const result = await createUserMutation(formData);
+      if (result?.data?.data?._id) {
+        toast.success(result?.data?.message as string);
         reset();
       }
 
@@ -163,21 +163,25 @@ const CreateUser = () => {
                 </select>
               </div>
               <div>
-                <p className="text-gray-500 font-semibold mt-3">Enter Domain</p>
-                <input
-                  type="text"
-                  className="w-full rounded-md border-0 py-1.5 pl-2 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6"
-                  placeholder="Domain"
-                  {...register("domain", {
-                    required: "Domain is required",
-                  })}
-                  aria-invalid={errors.domain ? "true" : "false"}
-                />
-                {errors.domain && (
-                  <p className="text-red-500 text-sm">
-                    {errors.domain.message}
-                  </p>
-                )}
+                <label
+                  htmlFor="domain"
+                  className="block mt-3 text-sm font-medium text-gray-900"
+                >
+                  Select Domain
+                </label>
+                <select
+                  id="domain"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  onChange={(e) => setDomain(e?.target?.value)}
+                  value={domain.toString()}
+                >
+                  <option value="IT">IT</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Management">Management</option>
+                  <option value="Management">Management</option>
+                </select>
               </div>
 
               <div>
