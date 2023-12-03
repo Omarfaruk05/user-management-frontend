@@ -35,6 +35,10 @@ const CreateUser = () => {
       formData.domain = domain;
 
       const result = await createUserMutation(formData);
+      if ("error" in result) {
+        toast.error("Failed to delete.");
+        return;
+      }
       if (result?.data?.data?._id) {
         toast.success(result?.data?.message as string);
         reset();

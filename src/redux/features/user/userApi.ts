@@ -27,10 +27,10 @@ const userApi = api.injectEndpoints({
       providesTags: ["user"],
     }),
     updateUser: builder.mutation({
-      query: ({ id, data }: { id: string; data: IUser }) => ({
+      query: ({ id, formData }: { id: string; formData: Partial<IUser> }) => ({
         url: `/users/${id}`,
         method: "PATCH",
-        body: data,
+        body: formData,
       }),
       invalidatesTags: ["user"],
     }),

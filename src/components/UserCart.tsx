@@ -1,25 +1,29 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable no-empty-pattern */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { Link } from "react-router-dom";
 import { IUser } from "../interfaces/userInterface";
 import { useDeleteUserMutation } from "../redux/features/user/userApi";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToTeam } from "../redux/features/team/teamSlice";
 
 const UserCart = (user: IUser) => {
   const dispatch = useDispatch();
-  const [deleteUserMutaion] = useDeleteUserMutation();
+  const [deleteUserMutation] = useDeleteUserMutation();
 
   const handleDeleteUser = async (id: string) => {
     try {
-      const result = await deleteUserMutaion(id);
-      if (result?.data?.data?._id as string) {
-        toast.success(result?.data?.message as string);
+      const result = await deleteUserMutation(id);
+
+      if ("error" in result) {
+        toast.error("Failed to delete.");
+        return;
+      }
+      const userData = result?.data;
+      if (userData?._id) {
+        toast.success(userData?.message as string);
       }
     } catch (error) {
       toast.error("Failed to delete.");
@@ -46,7 +50,7 @@ const UserCart = (user: IUser) => {
             >
               Add to Team
             </button>
-            <Link to={`/update-user/${user?._id}`}>
+            <Link to={`/update-user/${user?._id as string}`}>
               <button className="mx-1 py-1 px-2 font-semibold text-xs bg-lime-200 rounded-md">
                 Update
               </button>

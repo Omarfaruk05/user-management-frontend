@@ -9,16 +9,17 @@ import {
   useGetSingUserQuery,
   useUpdateUserMutation,
 } from "../redux/features/user/userApi";
+import { IUser } from "../interfaces/userInterface";
 
-interface IFormInput {
-  first_name: string;
-  last_name: string;
-  email: string;
-  gender: string;
-  avatar: string;
-  domain: string;
-  available: boolean;
-}
+// interface IFormInput {
+//   first_name: string;
+//   last_name: string;
+//   email: string;
+//   gender: string;
+//   avatar: string;
+//   domain: string;
+//   available: boolean;
+// }
 
 const UpdateUser = () => {
   const { id } = useParams();
@@ -35,23 +36,29 @@ const UpdateUser = () => {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = async (
-    formData: Partial<IFormInput>
-  ) => {
+  } = useForm<IUser>();
+  const onSubmit: SubmitHandler<IUser> = async (formData: Partial<IUser>) => {
     try {
       formData.available = available;
       formData.email = user?.email;
       formData.gender = gender;
       formData.domain = domain;
 
+      if (id === undefined) {
+        throw new Error("ID is undefined");
+      }
+
       const result = await updateUserMutation({ id, formData });
+      if ("error" in result) {
+        toast.error("Failed to update.");
+        return;
+      }
       if (result?.data?.data?._id) {
         toast.success(result?.data?.message as string);
       }
 
       console.log(formData);
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Somthing went wrong.");
     }
   };
@@ -135,12 +142,7 @@ const UpdateUser = () => {
                 )}
               </div>
               <div>
-                <p className="text-gray-500 font-semibold mt-3">
-                  Email{" "}
-                  <small className="text-xxs text-red-400">
-                    ( Email Must be unique)
-                  </small>
-                </p>
+                <p className="text-gray-500 font-semibold mt-3">Email </p>
                 <input
                   type="email"
                   className="w-full rounded-md border-0 py-1.5 px-2 bg-gray-100 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-teal-600 sm:text-sm sm:leading-6 "

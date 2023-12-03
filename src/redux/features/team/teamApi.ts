@@ -1,4 +1,3 @@
-import { ITeam } from "../../../interfaces/teamInterfaces";
 import { api } from "../../api/apiSlice";
 
 const teamApi = api.injectEndpoints({

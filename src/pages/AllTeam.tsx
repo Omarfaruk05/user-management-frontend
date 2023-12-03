@@ -35,6 +35,10 @@ const AllTeam = () => {
                     {user?.first_name} {user?.last_name}
                   </h4>
                   <p>Domain: {user?.domain}</p>
+                  <p className="text-xs">Gender: {user?.gender}</p>
+                  <p className="text-xs text-orange-600">
+                    Available: {user?.available.toString()}
+                  </p>
                 </div>
               ))}
             </div>

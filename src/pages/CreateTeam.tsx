@@ -24,13 +24,17 @@ const CreateTeam = () => {
   const handleCreateTeam = async () => {
     try {
       const result = await createTeamMutation({ users: usersArray });
+      if ("error" in result) {
+        toast.error("Failed to create.");
+        return;
+      }
       if (result?.data?.data?._id) {
         toast.success(result?.data?.message as string);
         dispatch(resetTeam());
       }
 
       console.log(result);
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Somthing went wrong.");
     }
   };
