@@ -1,33 +1,53 @@
+import { IUser } from "../../../interfaces/userInterface";
 import { api } from "../../api/apiSlice";
 
 const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    getUser: builder.mutation({
-      query: (data) => ({
-        url: `/user/get-user`,
-        method: "POST",
-        body: data,
-      }),
-    }),
     createUser: builder.mutation({
-      query: (data) => ({
-        url: `/user/create-user`,
+      query: (data: IUser) => ({
+        url: `/users`,
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["user"],
+    }),
+    getAllUser: builder.query({
+      query: (arg: Record<string, any>) => ({
+        url: `/users`,
+        method: "GET",
+        params: arg,
+      }),
+      providesTags: ["user"],
+    }),
+    getSingUser: builder.query({
+      query: (id: string) => ({
+        url: `/users/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["user"],
     }),
     updateUser: builder.mutation({
-      query: (data) => ({
-        url: `/user/update-user`,
+      query: (data: Partial<IUser>) => ({
+        url: `/users`,
         method: "PATCH",
         body: data,
       }),
+      invalidatesTags: ["user"],
+    }),
+    deleteUser: builder.mutation({
+      query: (id: string) => ({
+        url: `/users/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
 export const {
-  useGetUserMutation,
   useCreateUserMutation,
+  useGetAllUserQuery,
+  useGetSingUserQuery,
   useUpdateUserMutation,
+  useDeleteUserMutation,
 } = userApi;

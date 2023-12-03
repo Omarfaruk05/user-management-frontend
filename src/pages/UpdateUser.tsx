@@ -1,21 +1,21 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useCreateBookMutation } from "../redux/features/books/bookApi";
-import { useAppSelector } from "../redux/hook";
+import { useParams } from "react-router-dom";
+
 import { toast } from "react-toastify";
 
 interface IFormInput {
+  email: string | null;
+  id: string;
   image: string;
   title: string;
   author: string;
-  authorEmail: string;
   genre: string;
   publicationTime: Date;
 }
 
-const CreateBook = () => {
-  const { user } = useAppSelector((state) => state.user);
-
-  const [createBookMutation, result] = useCreateBookMutation();
+const UpdateBook = () => {
+  const { id } = useParams();
 
   const {
     register,
@@ -24,27 +24,22 @@ const CreateBook = () => {
     reset,
   } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    createBookMutation(data);
     reset();
   };
-  if (result?.isError) {
-    toast.error("Invalide Type Error.");
-  }
-  if (result?.isSuccess) {
-    toast.success(result?.data?.message);
-  }
 
   return (
     <div>
       <div className="max-w-7xl mx-auto mb-8 mt-2">
         <div className="text-center mx-12">
-          <h1 className="text-4xl font-bold font-serif mb-8">Create Book</h1>
+          <h1 className="text-4xl font-bold font-serif mb-8">Update User</h1>
 
           {/* form  */}
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <p className="text-gray-500 font-semibold ml-2">Enter Image</p>
+                <p className="text-gray-500 font-semibold ml-2">
+                  Update Image Link
+                </p>
                 <input
                   className="input input-bordered w-96 mb-3"
                   type="text"
@@ -52,6 +47,7 @@ const CreateBook = () => {
                   {...register("image", {
                     required: "Image is required",
                   })}
+                  // defaultValue={book?.image}
                   aria-invalid={errors.image ? "true" : "false"}
                 />
                 {errors.image && (
@@ -61,7 +57,7 @@ const CreateBook = () => {
                 )}
               </div>
               <div>
-                <p className="text-gray-500 font-semibold ml-2">Enter Title</p>
+                <p className="text-gray-500 font-semibold ml-2">Update Title</p>
                 <input
                   type="text"
                   className="input input-bordered w-96 mb-3"
@@ -69,6 +65,7 @@ const CreateBook = () => {
                   {...register("title", {
                     required: "Title is required",
                   })}
+                  // defaultValue={book?.title}
                   aria-invalid={errors.title ? "true" : "false"}
                 />
                 {errors.title && (
@@ -78,7 +75,9 @@ const CreateBook = () => {
                 )}
               </div>
               <div>
-                <p className="text-gray-500 font-semibold ml-2">Enter Author</p>
+                <p className="text-gray-500 font-semibold ml-2">
+                  Update Author
+                </p>
                 <input
                   type="text"
                   className="input input-bordered w-96 mb-3"
@@ -86,6 +85,7 @@ const CreateBook = () => {
                   {...register("author", {
                     required: "Author is required",
                   })}
+                  // defaultValue={book?.author}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.author && (
@@ -95,28 +95,7 @@ const CreateBook = () => {
                 )}
               </div>
               <div>
-                <p className="text-gray-500 font-semibold ml-2">
-                  Enter Author Email
-                </p>
-                <input
-                  type="email"
-                  className="input input-bordered w-96 mb-3 bg-gray-200 font-semibold"
-                  placeholder="Author Enail"
-                  value={user?.email!}
-                  readOnly
-                  {...register("authorEmail", {
-                    required: "Author Email is required",
-                  })}
-                  aria-invalid={errors.authorEmail ? "true" : "false"}
-                />
-                {errors.authorEmail && (
-                  <p className="text-red-500 text-sm -mt-2">
-                    {errors.authorEmail.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <p className="text-gray-500 font-semibold ml-2">Enter Genre</p>
+                <p className="text-gray-500 font-semibold ml-2">Update Genre</p>
                 <input
                   type="text"
                   className="input input-bordered w-96 mb-3"
@@ -124,6 +103,7 @@ const CreateBook = () => {
                   {...register("genre", {
                     required: "Genre is required",
                   })}
+                  // defaultValue={book?.genre}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.genre && (
@@ -134,15 +114,16 @@ const CreateBook = () => {
               </div>
               <div>
                 <p className="text-gray-500 font-semibold ml-2">
-                  Enter Publication Time
+                  Update Publication Time
                 </p>
                 <input
                   type="text"
                   className="input input-bordered w-96 mb-3"
                   placeholder="YY-MM-DD"
                   {...register("publicationTime", {
-                    required: "Pbulication time is required",
+                    required: "Publication Time is required",
                   })}
+                  // defaultValue={book?.publicationTime}
                   aria-invalid={errors.author ? "true" : "false"}
                 />
                 {errors.publicationTime && (
@@ -154,7 +135,7 @@ const CreateBook = () => {
               <div>
                 <input
                   type="submit"
-                  value="Create"
+                  value="Update"
                   className="bg-teal-700 btn text-white w-96 hover:bg-teal-800"
                 />
               </div>
@@ -166,4 +147,4 @@ const CreateBook = () => {
   );
 };
 
-export default CreateBook;
+export default UpdateBook;
