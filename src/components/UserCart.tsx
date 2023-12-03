@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable no-empty-pattern */
-/* eslint-disable @typescript-eslint/no-floating-promises */
 
 import { IUser } from "../interfaces/userInterface";
 import { useDeleteUserMutation } from "../redux/features/user/userApi";
@@ -11,7 +12,7 @@ const UserCart = (user: IUser) => {
   const handleDeleteUser = async (id: string) => {
     try {
       const result = await deleteUserMutaion(id);
-      if (result?.data?.data._id as string) {
+      if (result?.data?.data?._id as string) {
         toast.success(result?.data?.message as string);
       }
     } catch (error) {
@@ -31,6 +32,7 @@ const UserCart = (user: IUser) => {
           </h2>
           <p>Domain: {user?.domain}</p>
           <p>Gender: {user?.gender}</p>
+          <p className="text-sm">Available: {user?.available.toString()}</p>
           <div className="mt-3">
             <button className="mx-1 py-1 px-2 font-semibold text-xs bg-teal-100 rounded-md">
               Add to Team
@@ -39,7 +41,7 @@ const UserCart = (user: IUser) => {
               Update
             </button>
             <button
-              onClick={() => handleDeleteUser(user?._id)}
+              onClick={() => handleDeleteUser(user?._id as string)}
               className="mx-1 py-1 px-2 font-semibold text-xs bg-red-300 rounded-md"
             >
               Delete
