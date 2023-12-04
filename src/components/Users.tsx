@@ -130,12 +130,14 @@ const Users = () => {
               <div></div>
             </div>
             <div className="text-center">
-              <button
-                onClick={() => setPage(page + 1)}
-                className="py-1 px-3 mt-4 rounded-md bg-teal-800 text-white font-semibold"
-              >
-                {"Next >"}
-              </button>
+              {users?.length >= 20 && (
+                <button
+                  onClick={() => setPage(page + 1)}
+                  className="py-1 px-3 mt-4 rounded-md bg-teal-800 text-white font-semibold"
+                >
+                  {"Next >"}
+                </button>
+              )}
             </div>
           </div>
         </div>
