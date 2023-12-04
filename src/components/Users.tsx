@@ -65,7 +65,7 @@ const Users = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="my-4 flex  gap-4">
+            <div className="my-4 flex gap-4">
               <select
                 id="gender"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -112,13 +112,22 @@ const Users = () => {
             </div>
           </div>
           <div className="mx-auto">
+            {!users?.length && (
+              <div className="flex justify-center items-center min-h-[60vh]">
+                <h1 className="text-3xl font-semibold text-gray-500">
+                  No Data Found
+                </h1>
+              </div>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {isLoading &&
                 nums.map((x) => <LoadingCart key={x}></LoadingCart>)}
-              {users &&
-                users?.map((user: IUser) => (
-                  <UserCart {...user} key={user._id}></UserCart>
-                ))}
+              {users
+                ? users?.map((user: IUser) => (
+                    <UserCart {...user} key={user._id}></UserCart>
+                  ))
+                : nums.map((x) => <LoadingCart key={x}></LoadingCart>)}{" "}
+              <div></div>
             </div>
             <div className="text-center">
               <button
